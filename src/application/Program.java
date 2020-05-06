@@ -33,6 +33,33 @@ public class Program {
 		for (Seller obj : listAll) {
 			System.out.println(obj);
 		}
+		
+		
+		System.out.println();
+		//Seller newSeller = new Seller(null,"Ricardo Santos Caboclo","rscaboclo@gmail.com",new Date(),3500.0,department);
+		//sellerDao.insert(newSeller);
+		
+		
+		
+		//seller = sellerDao.findById(16);
+		//seller.setName("Maico Santos Caboclo");
+		//sellerDao.update(seller);
+		
+		System.out.println();
+		listAll = new ArrayList<>();
+		listAll = sellerDao.findAll();
+		for (Seller obj : listAll) {
+			System.out.println(obj);
+		}
+		
+		sellerDao.deletById(16);
+		
+		System.out.println();
+		listAll = new ArrayList<>();
+		listAll = sellerDao.findAll();
+		for (Seller obj : listAll) {
+			System.out.println(obj);
+		}
 
 	}
 
