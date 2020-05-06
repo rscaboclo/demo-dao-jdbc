@@ -1,7 +1,10 @@
 package application;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.dao.DaoFactory;
+import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -9,11 +12,24 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		Department obj = new Department(1, "Book");
-
-		Seller seller = new Seller(1, "Ricardo Santos Caboclo", "rscaboclo@gmail.com", new Date(), 3000.0, obj);
-
+		SellerDao sellerDao = DaoFactory.createSellerDao();
+		
+		Seller seller = sellerDao.findById(3);
+		
 		System.out.println(seller);
+		System.out.println();
+		
+		Department department =  new Department(2,null);
+		
+		List<Seller> list = new ArrayList<>();
+		
+		list = sellerDao.findByDepartment(department);
+		
+		for(Seller obj : list) {
+			System.out.println(obj);
+		}
+		
+
 	}
 
 }
