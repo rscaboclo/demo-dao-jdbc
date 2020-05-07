@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,11 +31,23 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 					"INSERT INTO department "
 					+"(Name) "
 					+ "VALUES "
-					+ "(?)",PreparedStatement.RETURN_GENERATED_KEYS);
+					+ "(?)",Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, obj.getName());
 			
 			int rowsAffecte = st.executeUpdate();
+			
+			if(rowsAffecte > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("erro inesperado, nenhuma lina alterada");
+			}
 		}
 		catch(SQLException e) {
 			throw new DbException(e.getMessage());

@@ -21,8 +21,9 @@ public class Program {
 		List<Seller> listSeller = new ArrayList<>();
 		
 		System.out.println("====================Insert====================");
-		dep = new Department(null,"Financeiro");
-		//depDao.insert(dep);
+		dep = new Department(null,"Recurso Humano");
+		depDao.insert(dep);
+		System.out.println("Registo inserido: "+ dep);
 		
 		System.out.println();
 		System.out.println("====================FindAll====================");
